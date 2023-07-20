@@ -51,7 +51,7 @@ namespace Player
 
         private void FixedUpdate(){
             MovePlayer();
-            Debug.Log(PlayerInputManager.Instance.jump);
+            //Debug.Log(PlayerInputManager.Instance.jump);
         }
 
         private void MyInput(){

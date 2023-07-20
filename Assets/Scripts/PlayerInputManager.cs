@@ -18,11 +18,13 @@ namespace Player
         private InputAction moveAction;
         private InputAction rotateAction;
         private InputAction jumpAction;
+        private InputAction fireAction;
 
         // Basic movement
         [HideInInspector] public Vector2 movement;
         [HideInInspector] public Vector2 rotation;
         [HideInInspector] public bool jump;
+        [HideInInspector] public bool fire;
 
         private void Awake()
         {
@@ -42,6 +44,7 @@ namespace Player
             moveAction = input.Player.Movement;
             rotateAction = input.Player.Rotation;
             jumpAction = input.Player.Jump;
+            fireAction = input.Player.Fire;
 
             // Movement
             moveAction.performed += ctx => {
@@ -64,6 +67,12 @@ namespace Player
 
             // Stops jumping when released
             jumpAction.canceled += ctx => jump = false;
+
+            // Fire
+            fireAction.performed += ctx => fire = true;
+            
+            // Stops firing when released
+            fireAction.canceled += ctx => fire = false;
         }
 
         // Start is called before the first frame update
@@ -83,12 +92,14 @@ namespace Player
             moveAction.Enable();
             rotateAction.Enable();
             jumpAction.Enable();
+            fireAction.Enable();
         }
         void OnDisable()
         {
             moveAction.Disable();
             rotateAction.Disable();
             jumpAction.Disable();
+            fireAction.Disable();
         }
     }
 }
